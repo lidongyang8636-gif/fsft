@@ -1,0 +1,60 @@
+# ── dsh-role-guard（RT-02 实验 + 角色硬边界 guard）─────────────────────────
+#
+# 怎么用：
+#   1. 把下面整段（从 `# INSERT-START` 到 `# INSERT-END`）
+#      追到 %USERPROFILE%\.dsh\profiles\desktop\cordis.patch.yml 的**顶层数组**里；
+#      新插件必须放在 `- insert:` 下（不要把 `- id: role-guard` 直接放顶层，
+#      那种写法只覆盖已有条目；role-guard 不存在时会被忽略）。
+#   2. 重启 DSH（本机 profile 没有 dsh-hmr ⇒ 改动不会热生效）；
+#   3. 按 guards/role-guard/README.md §2.2 判定表跑 RT-02 实验。
+#
+# ⚠ 两个刻意选择，勿"优化"掉：
+#
+#   (a) name 用**工作区绝对路径**。依据 app.asar 内 plugin-manager 原文：
+#         isAbsolute(entry.options.name) ? pathToFileURL(...) : new URL(..., treeBase)
+#       ⇒ 绝对路径直接当 ESM 模块加载，插件**不必**装进 profile 的 node_modules。
+#       好处：插件随工作区备份/回滚，profile 侧只多这几行。
+#
+#   (b) mode 默认 `dry-run`。brief §2.1 明写"先做 dry-run，判据验证正确后再打开强制，
+#       避免在活跃会话里突然把工具锁死"。dry-run 下**只有探针真拒**（否则实验观测不到）。
+#
+# ── 第一轮（RT-02 实验，dry-run + 探针）───────────────────────────────────
+# INSERT-START
+- insert:
+    - id: role-guard
+      name: '%MAIN_REPO%-dsh/guards/role-guard/lib/index.js'
+      config:
+        # dry-run：只记录"本应拒绝谁"，不真拒绝；探针除外（探针永远真拒）
+        mode: dry-run
+        # 探针：只读 MCP 工具（brief §1.1① 硬要求）。
+        # 留空表示由只读白名单 + 角色作用域决定；重跑 RT-02 式实验时加回
+        #   - mcp__vivado__list_sessions
+        probeDeny: []
+        # 把"可见工具名 → 会放行/会拒绝"逐条打进日志，便于核对判定器
+        probeReadOnlyNames: true
+        # 可选加固层：把 MCP 写工具从 agent 可见集合里遮蔽（默认关；先看 guard 主闸门）
+        restrictMcpWriteTools: false
+        # per-agent 注册路径（agent/created + agent.ctx）不用：有时序竞态与卸载坑，
+        # 角色模式改用「全局 guard + 调用时按 exec.agent 判角色」
+        agentScope:
+          enabled: false
+          agentIds: []
+          role: reviewer
+        # 角色作用域（用户 2026-10-14 决策）：
+        #   Lead 也锁 / 只有 writer* 能写 / 身份未知放行 / 服务缺失按 guard
+        roleScope:
+          enabled: true
+          writerNamePatterns: ['writer']
+          unknownPolicy: pass
+          serviceMissingPolicy: guard
+# INSERT-END
+#
+# ── 第二轮（实验通过后：打开强制）─────────────────────────────────────────
+# 把上面 `mode: dry-run` 改成：
+#     mode: enforce
+# 重启后再复验一次；想连 schema 都看不见，再把 restrictMcpWriteTools 改 true。
+#
+# ── 回滚 ─────────────────────────────────────────────────────────────────
+# 最轻：把 `mode:` 改回 dry-run（就不拦了，但仍有日志）；
+# 次轻：在本条目加 `disabled: true`；
+# 彻底：删掉 INSERT-START…INSERT-END 整段并重启。

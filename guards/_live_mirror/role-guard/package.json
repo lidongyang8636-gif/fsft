@@ -1,0 +1,14 @@
+{
+  "name": "dsh-role-guard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "DSH 角色硬边界 guard：按 agent 强制工具边界；含 RT-02 最小实验探针",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "files": [
+    "lib"
+  ]
+}

@@ -1,0 +1,20 @@
+# guard-ui 插件注册 patch
+#
+# ⚠ 本文件是「插件自带 patch」，只有把 guard-ui 当 **npm 包**装进 profile 时才由
+#   `dsh.bundle.patch` 自动应用。
+#
+# 本机现状：guard-ui 不在 profile 的 node_modules 里，而是**以绝对路径注册**
+#   （与 role-guard / subagent-sandbox 同一形态，见 profile 的 cordis.patch.yml）。
+#   因此**真正生效**的那条 patch 在
+#     %USERPROFILE%\.dsh\profiles\desktop\cordis.patch.yml
+#   里，由 **Lead** 在插件交付后写入（writer 禁止写 profile——TASK.1/2 §0）。
+#   要插入的 YAML（顶层必须是 `- insert:`，顶层裸 `- id:` 只覆盖已有条目）：
+#
+#     - insert:
+#         - id: guard-ui
+#           name: '%MAIN_REPO%-dsh/guards/guard-ui/lib/index.js'
+#
+# 本文件保留同样内容，作为「若将来打包分发」时的自带声明，以及契约文档。
+- insert:
+    - id: guard-ui
+      name: '%MAIN_REPO%-dsh/guards/guard-ui/lib/index.js'

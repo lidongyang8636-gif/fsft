@@ -1,0 +1,14 @@
+{
+  "name": "dsh-subagent-sandbox",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "把子会话钉进指定权限档（只读边界的文件沙箱一半）。本插件会真落档（enforce），不是只观察的探针",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "files": [
+    "lib"
+  ]
+}

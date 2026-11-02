@@ -1,0 +1,14 @@
+{
+  "name": "dsh-gate-guard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "R3b 上板门：烧板/位流/固化类 MCP 工具在缺少新鲜 gate 收口证据时分三级处置（ask/deny/放行）；插件自身任何异常一律 fail-open 放行",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "files": [
+    "lib"
+  ]
+}
