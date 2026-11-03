@@ -1,0 +1,33 @@
+{
+  "level": "L1",
+  "claimsWhat": "UNVERIFIED 态：同一描述符里有三条\"未取得结论\"的路径",
+  "noWrite": [
+    "gate/lib"
+  ],
+  "refs": [
+    "slices/gate/TASK.1.md §3.2",
+    "slices/gate/TASK.1.md §4-A2"
+  ],
+  "taskId": "selftest-unverified",
+  "acceptance": [
+    {
+      "id": "S1",
+      "cmd": "gate-definitely-not-a-real-exe-xyz",
+      "args": [],
+      "shell": false,
+      "exit": 0,
+      "cwd": "."
+    },
+    {
+      "id": "S2",
+      "assert": "exists:gate/gate.mjs",
+      "cwd": "."
+    },
+    {
+      "id": "S3",
+      "cmd": "\"C:\\Users\\john\\nodejs\\node.exe\" -e \"process.exitCode=0\"",
+      "cwd": ".",
+      "allowUndeclaredExit": true
+    }
+  ]
+}

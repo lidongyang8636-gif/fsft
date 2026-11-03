@@ -1,0 +1,23 @@
+{
+  "taskId": "selftest-mismatch-cli",
+  "level": "L1",
+  "claimsWhat": "★ 负例（通过 CLI 跑，证明 MISMATCH 会被判红）：**声称 exit=0，而命令真实 exit=3**",
+  "_provenance": {
+    "note": "这是 A2 要求的『MISMATCH 负例』的命令行版本。它故意撒谎以获得 MISMATCH 态；不是可交付任务，只用于自测证明。",
+    "whyExit3": "命令写 process.exitCode=3，描述符却声明 exit=0 —— 真实退出码 3 由 runner 独立测量，不读取任何自述。"
+  },
+  "acceptance": [
+    {
+      "id": "M1",
+      "what": "真相：命令真实退出码为 3",
+      "cmd": "node",
+      "args": ["-e", "process.exitCode=3"],
+      "cwd": ".",
+      "exit": 0,
+      "assert": "stdout_contains:这句结论串永远不存在-用于证明-退出码说不过就取红"
+    }
+  ],
+  "noWrite": ["gate/lib"],
+  "rollback": "删本文件与它产生的 evidence 即可。",
+  "refs": ["slices/gate/TASK.1.md §4-A2", "gate/SPEC.md §3.2"]
+}

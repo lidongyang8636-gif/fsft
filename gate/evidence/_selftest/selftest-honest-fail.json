@@ -1,0 +1,20 @@
+{
+  "level": "L1",
+  "claimsWhat": "HONEST_FAIL 态：声明 exit=3 且真实 exit=3（诚实声明失败）",
+  "noWrite": [
+    "gate/lib"
+  ],
+  "refs": [
+    "slices/gate/TASK.1.md §3.2",
+    "slices/gate/TASK.1.md §4-A2"
+  ],
+  "taskId": "selftest-honest-fail",
+  "acceptance": [
+    {
+      "id": "S1",
+      "cmd": "\"C:\\Users\\john\\nodejs\\node.exe\" -e \"process.exitCode=3\"",
+      "exit": 3,
+      "cwd": "."
+    }
+  ]
+}

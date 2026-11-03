@@ -1,0 +1,23 @@
+{
+  "schema": "gate-doc-link-exceptions/v0",
+  "_why": "已知断链的**声明**表（与现场 four-layer-pending.json 同族：已知差异必须声明并写理由，不许删掉以消音）。判据是 undeclared missing == 0；表里的条目不算失败，但会被逐条打印；条目若已不再断链会打印 STALE。",
+  "_scopeNote": "本表只登记、不修改被点名的文档 —— 两条都属于别的线/工作区结构问题，不在 gate slice 写域内。",
+  "entries": [
+    {
+      "file": "docs/FPGA_位流与ELF联合烧写标准流程.md",
+      "target": "../../ACX720知识库/流程与基线/14_Vivado通用开发流程与比特流新鲜度门禁.md",
+      "reason": "指向本文档依赖的仓外同类文档，真身在主仓库对应工作树内（各工作树均存在该真身）。**从本工作区结构上不可解析**，且该文档非本 slice 写域。",
+      "owner": "非 gate slice（仓库历史链接，跨 checkout 布局假设）",
+      "since": "2026-10-16",
+      "disposition": "只登记，不改动该文档"
+    },
+    {
+      "file": "docs/smart-home-acx720/08-整体测试报告.md",
+      "target": "../smart_home/slices/_common/reviews/RT-T3-continuity.md",
+      "reason": "相对层级少一级：从 docs/smart-home-acx720/ 出发应为 ../../smart_home/…；实测目标文件确实存在于 smart_home/slices/_common/reviews/RT-T3-continuity.md。Lead 2026-10-16 已查明并裁定「只记录、不修、不动文件」（非本 slice 写域）。",
+      "owner": "非 gate slice（另一条线的文档）",
+      "since": "2026-10-16",
+      "disposition": "只登记，不改动该文档"
+    }
+  ]
+}

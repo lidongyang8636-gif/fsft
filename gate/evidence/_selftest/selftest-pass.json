@@ -1,0 +1,24 @@
+{
+  "level": "L1",
+  "claimsWhat": "PASS 态：声明 exit=0 且真实 exit=0，外加一条文件判据",
+  "noWrite": [
+    "gate/lib"
+  ],
+  "refs": [
+    "slices/gate/TASK.1.md §3.2",
+    "slices/gate/TASK.1.md §4-A2"
+  ],
+  "taskId": "selftest-pass",
+  "acceptance": [
+    {
+      "id": "S1",
+      "assert": "exists:gate/gate.mjs"
+    },
+    {
+      "id": "S2",
+      "cmd": "\"C:\\Users\\john\\nodejs\\node.exe\" -e \"process.exitCode=0\"",
+      "exit": 0,
+      "cwd": "."
+    }
+  ]
+}

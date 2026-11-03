@@ -1,0 +1,20 @@
+{
+  "level": "L1",
+  "claimsWhat": "★ MISMATCH 负例：**声称 exit=0，真实 exit=3** —— 抓的就是\"自述未跑/自述通过\"",
+  "noWrite": [
+    "gate/lib"
+  ],
+  "refs": [
+    "slices/gate/TASK.1.md §3.2",
+    "slices/gate/TASK.1.md §4-A2"
+  ],
+  "taskId": "selftest-mismatch",
+  "acceptance": [
+    {
+      "id": "S1",
+      "cmd": "\"C:\\Users\\john\\nodejs\\node.exe\" -e \"process.exitCode=3\"",
+      "exit": 0,
+      "cwd": "."
+    }
+  ]
+}

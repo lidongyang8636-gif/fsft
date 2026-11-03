@@ -1,0 +1,224 @@
+{
+  "taskId": "guards-suite-r1",
+  "level": "L2-F",
+  "claimsWhat": "本工程现役验证（由本适配器在生成描述符时**从树里发现**的 guard-ui/role-guard/subagent-sandbox 三插件 test/ 共 12 个）—— 本次实测 **9/12** 真实退出码 0；G06/G07/G09 为**环境测试**（分别依赖未入库的 .cache 生成物、宿主 profile 绝对路径），红就写红、不降 notRun 也不改判据凑绿；每个脚本至少证明它自己声称的那一组断言（逐条 what 见 acceptance）",
+  "owner": "writer-gate",
+  "round": 1,
+  "date": "2026-10-16",
+  "_provenance": {
+    "note": "★ 本描述符由 gate/adapters/guards-suite.mjs#buildTask() **生成**（R2 起单一事实来源）；用 `node gate/scripts/gen-tasks.mjs --check` 机械核对，不再靠散文承诺。",
+    "adapter": "gate/adapters/guards-suite.mjs",
+    "measuredBaseline": "2026-11-03 R10 本树实跑：9/12 真实 exit=0；G06/G07 红（ENOENT .cache/dsh-guard/mcp-tools.txt）、G09 红（宿主 profile 绝对路径）—— 三条均为环境测试。**2026-10-16 的\"12/12 全绿\"是旧树旧环境记录，已作废**；不得据此声称镜像可复现（镜像受 verify-all G4 逐字节约束）。",
+    "oraclePolicy": "判据只用【真实退出码】。routes.mjs 的 stdout 含 mkdtemp 路径、逐次不同 ⟹ 不作判据；audit-allow.mjs / validate-patch.mjs 无终判串 ⟹ 其 oracle 为 exit_code（弱），不冒充结论串证据。其余 10 个另给 stdout_contains 结论串佐证；退出码说\"过\"而文本无结论串时 runner 按最强者取红。",
+    "knownSideEffects": [
+      {
+        "path": ".cache/dsh-guard/js-allow.txt",
+        "by": "G07",
+        "kind": "测试重新生成清单"
+      },
+      {
+        "path": ".cache/dsh-guard/js-deny.txt",
+        "by": "G07",
+        "kind": "测试重新生成清单"
+      },
+      {
+        "path": ".cache/dsh-guard/profile-patch.CONSTRUCTED.yml",
+        "by": "G09",
+        "kind": "测试构造产物"
+      }
+    ]
+  },
+  "noWrite": [
+    "guards/_live_mirror/guard-ui/lib",
+    "guards/_live_mirror/role-guard/lib",
+    "guards/_live_mirror/subagent-sandbox/lib",
+    "slices/guard-ui"
+  ],
+  "rollback": "本任务只读（noWrite 覆盖三个 guard 的 lib/ 与 slices/guard-ui/）；删 gate/evidence/gate-guards-suite-r1-*.json 即可。测试自身会重新生成 .cache/dsh-guard/{js-allow.txt,js-deny.txt,profile-patch.CONSTRUCTED.yml}（已登记为已知副作用，不在本 slice 写域）。",
+  "hashFiles": [
+    "gate/adapters/guards-suite.mjs"
+  ],
+  "refs": [
+    "slices/gate/TASK.1.md §3.1 §3.2 §3.5 §4-A3",
+    "gate/_recon/INVENTORY.md §3.2",
+    "gate/adapters/guards-suite.mjs"
+  ],
+  "acceptance": [
+    {
+      "id": "G01",
+      "what": "guard-ui 客户端半冒烟（含\"渲染不含 undefined\"）",
+      "cmd": "node",
+      "args": [
+        "guards/_live_mirror/guard-ui/test/client-smoke.mjs"
+      ],
+      "cwd": ".",
+      "exit": 0,
+      "assert": "stdout_contains:guard-ui 客户端半冒烟全部通过"
+    },
+    {
+      "id": "G02",
+      "what": "静态可加载性：缺 webServer 时 apply 必须抛（不静默降级）",
+      "cmd": "node",
+      "args": [
+        "guards/_live_mirror/guard-ui/test/loadable.mjs"
+      ],
+      "cwd": ".",
+      "exit": 0,
+      "assert": "stdout_contains:静态可加载性自检全部通过"
+    },
+    {
+      "id": "G03",
+      "what": "红队 F1–F4 修复验证（symlink/junction、profile 组合）",
+      "cmd": "node",
+      "args": [
+        "guards/_live_mirror/guard-ui/test/redteam.3.mjs"
+      ],
+      "cwd": ".",
+      "exit": 0,
+      "assert": "stdout_contains:红队 F1–F4 修复验证全部通过"
+    },
+    {
+      "id": "G04",
+      "what": "guard-ui 主机半自测（HTTP 路由契约、坏 settings）",
+      "cmd": "node",
+      "args": [
+        "guards/_live_mirror/guard-ui/test/routes.mjs"
+      ],
+      "cwd": ".",
+      "exit": 0,
+      "assert": "stdout_contains:guard-ui 主机半自测全部通过"
+    },
+    {
+      "id": "G05",
+      "what": "settings.js 契约自测（含 BOM 处理）",
+      "cmd": "node",
+      "args": [
+        "guards/_live_mirror/guard-ui/test/settings.mjs"
+      ],
+      "cwd": ".",
+      "exit": 0,
+      "assert": "stdout_contains:settings.js 契约自测全部通过"
+    },
+    {
+      "id": "G06",
+      "what": "allow 清单里有没有漏进去的写操作（清单级）",
+      "cmd": "node",
+      "args": [
+        "guards/_live_mirror/role-guard/test/audit-allow.mjs"
+      ],
+      "cwd": ".",
+      "exit": 0
+    },
+    {
+      "id": "G07",
+      "what": "判定器\"有没有搞错方向\"（断言级）",
+      "cmd": "node",
+      "args": [
+        "guards/_live_mirror/role-guard/test/selfcheck.mjs"
+      ],
+      "cwd": ".",
+      "exit": 0,
+      "assert": "stdout_contains:全部断言通过"
+    },
+    {
+      "id": "G08",
+      "what": "插件逻辑本身（stub 应用）；含负控",
+      "cmd": "node",
+      "args": [
+        "guards/_live_mirror/role-guard/test/stub-apply.mjs"
+      ],
+      "cwd": ".",
+      "exit": 0,
+      "assert": "stdout_contains:stub 验证全部通过"
+    },
+    {
+      "id": "G09",
+      "what": "校验构造出的 profile 补丁",
+      "cmd": "node",
+      "args": [
+        "guards/_live_mirror/role-guard/test/validate-patch.mjs"
+      ],
+      "cwd": ".",
+      "exit": 0
+    },
+    {
+      "id": "G10",
+      "what": "每工作区覆盖；坏 cwd 下 reviewer 仍被拒",
+      "cmd": "node",
+      "args": [
+        "guards/_live_mirror/role-guard/test/workspace-override.mjs"
+      ],
+      "cwd": ".",
+      "exit": 0,
+      "assert": "stdout_contains:role-guard 工作区覆盖自测全部通过"
+    },
+    {
+      "id": "G11",
+      "what": "子代理探针离线自检",
+      "cmd": "node",
+      "args": [
+        "guards/_live_mirror/subagent-sandbox/test/stub-apply.mjs"
+      ],
+      "cwd": ".",
+      "exit": 0,
+      "assert": "stdout_contains:探针离线自检全部通过"
+    },
+    {
+      "id": "G12",
+      "what": "子代理侧每工作区覆盖",
+      "cmd": "node",
+      "args": [
+        "guards/_live_mirror/subagent-sandbox/test/workspace-override.mjs"
+      ],
+      "cwd": ".",
+      "exit": 0,
+      "assert": "stdout_contains:subagent-sandbox 工作区覆盖自测全部通过"
+    }
+  ],
+  "notRun": [
+    {
+      "id": "N1",
+      "category": "capability",
+      "what": ".cache/dsh-guard/link_gate.py（链接门禁）",
+      "why": "① 实测**永不判红**：`ok=67 missing=2` 仍 exit=0（源码里 bad 只参与打印）⟹ 不可作验收判据；② 它是**全工作区扫描**，别人改文档就会移动数字（missing 今日 1→2）⟹ 要当判据必须\"钉基线\"；③ 有越界副作用：写 `.cache/dsh-guard/link-gate-result.txt`（**内容幂等、mtime 非幂等**），不在本 slice 写域内。",
+      "precondition": "无前置阻碍（它跑得动）—— 是**判据不成立**而非\"跑不了\"：它恒返回 0。要用它就必须先把期望值钉进描述符，并接受它会写 `.cache/dsh-guard/**`。",
+      "realCommand": "python .cache/dsh-guard/link_gate.py",
+      "cwd": ".",
+      "exitSemantics": "恒 0（无判据能力）"
+    },
+    {
+      "id": "N2",
+      "category": "capability",
+      "what": "smart_home/slices/_common/*（第一代收口层）与 sync-templates.ps1",
+      "why": "属 smart_home/ 域且多数会写 smart_home/**（不在本 slice 写域内）。已在 INVENTORY §1 逐条登记，本轮不实跑。",
+      "precondition": "需要写 smart_home/**（多个脚本会改 expected-drift.json / NOT_RUN.index.md / STATUS.generated.md）⟹ 越界。",
+      "realCommand": null,
+      "cwd": "smart_home/slices/_common",
+      "exitSemantics": "0=通过 / 2=判红 / 3=拒绝运行（各脚本不完全一致，见 INVENTORY §1）"
+    },
+    {
+      "id": "N3",
+      "category": "capability",
+      "what": "lab_2_2_11_wifi-package/**（第二代域内验证）与 fpga/** 各 .tcl",
+      "why": "需 staging 构建副本／后端进程／Edge／Vivado；已知 lab-console-proof.mjs 在本会话起不来。已在 INVENTORY §2 逐条登记，本轮不实跑。",
+      "precondition": "需提权（构建产物）+ 后端进程 + Edge/CDP，或 Vivado 2019.1 会话。",
+      "realCommand": null,
+      "cwd": "lab_2_2_11_wifi-package",
+      "exitSemantics": "见 INVENTORY §2（同一目录里 exit 2 / 转发 / throw 三种语义并存）"
+    }
+  ],
+  "files": [
+    "guards/_live_mirror/guard-ui/test/client-smoke.mjs",
+    "guards/_live_mirror/guard-ui/test/loadable.mjs",
+    "guards/_live_mirror/guard-ui/test/redteam.3.mjs",
+    "guards/_live_mirror/guard-ui/test/routes.mjs",
+    "guards/_live_mirror/guard-ui/test/settings.mjs",
+    "guards/_live_mirror/role-guard/test/audit-allow.mjs",
+    "guards/_live_mirror/role-guard/test/selfcheck.mjs",
+    "guards/_live_mirror/role-guard/test/stub-apply.mjs",
+    "guards/_live_mirror/role-guard/test/validate-patch.mjs",
+    "guards/_live_mirror/role-guard/test/workspace-override.mjs",
+    "guards/_live_mirror/subagent-sandbox/test/stub-apply.mjs",
+    "guards/_live_mirror/subagent-sandbox/test/workspace-override.mjs"
+  ]
+}

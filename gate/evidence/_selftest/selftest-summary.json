@@ -1,0 +1,112 @@
+{
+  "schema": "gate-selftest/v0",
+  "ranAt": "2026-11-03T16:27:51.570Z",
+  "node": "v24.21.0",
+  "executable": "C:\\Users\\john\\nodejs\\node.exe",
+  "mustHave": [
+    "PASS",
+    "HONEST_FAIL",
+    "MISMATCH",
+    "UNVERIFIED"
+  ],
+  "covered": {
+    "PASS": true,
+    "HONEST_FAIL": true,
+    "MISMATCH": true,
+    "UNVERIFIED": true
+  },
+  "mismatchNegative": true,
+  "hardFail": 0,
+  "results": [
+    {
+      "taskId": "selftest-pass",
+      "expected": "PASS",
+      "perAssertion": [
+        "S1=PASS",
+        "S2=PASS"
+      ],
+      "statesSeen": [
+        "PASS"
+      ],
+      "verdict": "PASS",
+      "gateOk": true,
+      "declaredExit": [
+        null,
+        0
+      ],
+      "realExit": [
+        null,
+        0
+      ],
+      "evidencePath": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public\\gate\\evidence\\_selftest\\gate-selftest-pass-2026-11-03T16-27-50Z.json",
+      "gateLine": "GATE selftest-pass PASS assertions=2 PASS=2 HONEST_FAIL=0 MISMATCH=0 UNVERIFIED=0 ran=1 noWrite=clean:1"
+    },
+    {
+      "taskId": "selftest-honest-fail",
+      "expected": "HONEST_FAIL",
+      "perAssertion": [
+        "S1=HONEST_FAIL"
+      ],
+      "statesSeen": [
+        "HONEST_FAIL"
+      ],
+      "verdict": "HONEST_FAIL",
+      "gateOk": false,
+      "declaredExit": [
+        3
+      ],
+      "realExit": [
+        3
+      ],
+      "evidencePath": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public\\gate\\evidence\\_selftest\\gate-selftest-honest-fail-2026-11-03T16-27-51Z.json",
+      "gateLine": "GATE selftest-honest-fail gateOk=false(assertions=HONEST_FAIL) assertions=1 PASS=0 HONEST_FAIL=1 MISMATCH=0 UNVERIFIED=0 ran=1 noWrite=clean:1"
+    },
+    {
+      "taskId": "selftest-mismatch",
+      "expected": "MISMATCH",
+      "perAssertion": [
+        "S1=MISMATCH"
+      ],
+      "statesSeen": [
+        "MISMATCH"
+      ],
+      "verdict": "MISMATCH",
+      "gateOk": false,
+      "declaredExit": [
+        0
+      ],
+      "realExit": [
+        3
+      ],
+      "evidencePath": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public\\gate\\evidence\\_selftest\\gate-selftest-mismatch-2026-11-03T16-27-51Z.json",
+      "gateLine": "GATE selftest-mismatch gateOk=false(assertions=MISMATCH) assertions=1 PASS=0 HONEST_FAIL=0 MISMATCH=1 UNVERIFIED=0 ran=1 noWrite=clean:1"
+    },
+    {
+      "taskId": "selftest-unverified",
+      "expected": "UNVERIFIED",
+      "perAssertion": [
+        "S1=UNVERIFIED",
+        "S2=PASS",
+        "S3=UNVERIFIED"
+      ],
+      "statesSeen": [
+        "UNVERIFIED",
+        "PASS"
+      ],
+      "verdict": "UNVERIFIED",
+      "gateOk": false,
+      "declaredExit": [
+        0,
+        null,
+        null
+      ],
+      "realExit": [
+        null,
+        null,
+        0
+      ],
+      "evidencePath": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public\\gate\\evidence\\_selftest\\gate-selftest-unverified-2026-11-03T16-27-51Z.json",
+      "gateLine": "GATE selftest-unverified gateOk=false(assertions=UNVERIFIED) assertions=3 PASS=1 HONEST_FAIL=0 MISMATCH=0 UNVERIFIED=2 ran=1 noWrite=clean:1"
+    }
+  ]
+}

@@ -1,0 +1,301 @@
+{
+  "schema": "gate-evidence/v0",
+  "taskId": "selftest-unverified",
+  "taskPath": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public\\gate\\evidence\\_selftest\\selftest-unverified.json",
+  "level": "L1",
+  "claimsWhat": "UNVERIFIED 态：同一描述符里有三条\"未取得结论\"的路径",
+  "startedAt": "2026-11-03T16:27:51.419Z",
+  "finishedAt": "2026-11-03T16:27:51.564Z",
+  "durationMs": 145,
+  "environment": {
+    "platform": "win32",
+    "arch": "x64",
+    "node": "v24.21.0",
+    "cwd": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public",
+    "root": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public",
+    "runtimes": {
+      "python": {
+        "path": "C:\\Users\\john\\.dsh\\dsh-runtimes\\dsh-primary-runtime\\dependencies\\python\\python.exe",
+        "source": "bundled",
+        "tried": [
+          {
+            "source": "bundled-candidate",
+            "path": "C:\\Users\\john\\.dsh\\dsh-runtimes\\dsh-primary-runtime\\dependencies\\python\\python.exe",
+            "exists": true
+          }
+        ]
+      },
+      "node": {
+        "path": "C:\\Users\\john\\nodejs\\node.exe",
+        "source": "process.execPath"
+      },
+      "pathEnv": "41 entries"
+    },
+    "note": "spawnSync 管道在本沙箱下 EPERM ⟹ runner 用 fd 重定向捕获输出（被拒时回落 inherit）；TEMP/TMP 已钉进工作区并在收尾清理"
+  },
+  "taskState": {
+    "gateOk": false,
+    "verdict": "UNVERIFIED",
+    "counts": {
+      "PASS": 1,
+      "HONEST_FAIL": 0,
+      "MISMATCH": 0,
+      "UNVERIFIED": 2
+    }
+  },
+  "notRun": [],
+  "notRunCount": 0,
+  "pins": {
+    "policy": "收口时（gate/close.mjs）逐条重算；任一不符 ⟹ 证据已过期，拒绝收口。改了判据机器/描述符就必须重跑。",
+    "descriptor": {
+      "path": "gate/evidence/_selftest/selftest-unverified.json",
+      "abs": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public\\gate\\evidence\\_selftest\\selftest-unverified.json",
+      "exists": true,
+      "sha256": "955910a4d78f6e18dfac4db08df539c365a090a19993bbf482f1d29a738ce69a",
+      "note": "任务描述符：改了它，旧证据即作废"
+    },
+    "machinery": [
+      {
+        "path": "gate/gate.mjs",
+        "abs": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public\\gate\\gate.mjs",
+        "exists": true,
+        "sha256": "a82344e9af09cc023abe94854e96ebcfb00b93454eb12edd175fa3c6634c78a9",
+        "note": "判据机器：改了它，旧证据即作废（换机器 / 升级 runner 后必须重跑）"
+      },
+      {
+        "path": "gate/lib/runner.mjs",
+        "abs": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public\\gate\\lib\\runner.mjs",
+        "exists": true,
+        "sha256": "ef7b0b707818b815910b7571fbd31aaa31f6a0c75ee74170da090ba55f38a7b5",
+        "note": "判据机器：改了它，旧证据即作废（换机器 / 升级 runner 后必须重跑）"
+      },
+      {
+        "path": "gate/lib/env.mjs",
+        "abs": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public\\gate\\lib\\env.mjs",
+        "exists": true,
+        "sha256": "82dc333ac04287f3b46ee80112d89390df624ba4f0ac1e39100fbbfe090d3007",
+        "note": "判据机器：改了它，旧证据即作废（换机器 / 升级 runner 后必须重跑）"
+      }
+    ],
+    "declared": []
+  },
+  "noWriteDeclared": [
+    "gate/lib"
+  ],
+  "noWriteResults": [
+    {
+      "path": "gate/lib",
+      "resolved": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public\\gate\\lib",
+      "base": "root",
+      "files": 2,
+      "changed": false,
+      "verdict": "CLEAN",
+      "note": null
+    }
+  ],
+  "noWriteUnresolved": [],
+  "evaluated": [
+    {
+      "id": "S1",
+      "what": null,
+      "declaration": {
+        "assert": null,
+        "cmd": "gate-definitely-not-a-real-exe-xyz",
+        "args": [],
+        "cwd": ".",
+        "exit": 0,
+        "envFailCodes": [],
+        "env": {}
+      },
+      "real": {
+        "exit": null,
+        "stdout": {
+          "text": "",
+          "truncated": false,
+          "bytes": 0
+        },
+        "stderr": {
+          "text": "",
+          "truncated": false,
+          "bytes": 0
+        },
+        "ms": 5,
+        "signal": null,
+        "cwd": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public",
+        "line": "gate-definitely-not-a-real-exe-xyz",
+        "capture": "fd",
+        "harness": "spawn_error",
+        "error": {
+          "code": "ENOENT",
+          "message": "spawnSync gate-definitely-not-a-real-exe-xyz ENOENT"
+        },
+        "outputNote": "截断保留【首+尾】（尾 = 终判串所在处）；outMax=20000"
+      },
+      "oracle": "exit_code",
+      "files": [],
+      "state": "UNVERIFIED",
+      "basis": "命令未能启动（ENOENT）⟹ 未跑，不得当通过",
+      "notes": [
+        "真实错误：ENOENT spawnSync gate-definitely-not-a-real-exe-xyz ENOENT"
+      ]
+    },
+    {
+      "id": "S2",
+      "what": null,
+      "declaration": {
+        "assert": "exists:gate/gate.mjs",
+        "cmd": null,
+        "args": [],
+        "cwd": ".",
+        "exit": null,
+        "envFailCodes": [],
+        "env": {}
+      },
+      "real": {
+        "exit": null,
+        "stdout": null,
+        "stderr": null,
+        "ms": null,
+        "signal": null
+      },
+      "oracle": "path",
+      "files": [
+        {
+          "path": "gate/gate.mjs",
+          "abs": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public\\gate\\gate.mjs",
+          "base": "root",
+          "sha256": "a82344e9af09cc02",
+          "exists": true,
+          "changedByCommand": false
+        }
+      ],
+      "state": "PASS",
+      "basis": "文件/路径判据（不产生退出码）：exists: gate/gate.mjs ⟹ 存在 (E:\\ChongyouGreenbike-dsh\\_build\\fsft-public\\gate\\gate.mjs；基准=root)",
+      "notes": []
+    },
+    {
+      "id": "S3",
+      "what": null,
+      "declaration": {
+        "assert": null,
+        "cmd": "\"C:\\Users\\john\\nodejs\\node.exe\" -e \"process.exitCode=0\"",
+        "args": [],
+        "cwd": ".",
+        "exit": null,
+        "envFailCodes": [],
+        "env": {}
+      },
+      "real": {
+        "exit": 0,
+        "stdout": {
+          "text": "",
+          "truncated": false,
+          "bytes": 0
+        },
+        "stderr": {
+          "text": "",
+          "truncated": false,
+          "bytes": 0
+        },
+        "ms": 134,
+        "signal": null,
+        "cwd": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public",
+        "line": "\"C:\\Users\\john\\nodejs\\node.exe\" -e \"process.exitCode=0\"",
+        "capture": "fd",
+        "harness": "exited",
+        "error": null,
+        "outputNote": "截断保留【首+尾】（尾 = 终判串所在处）；outMax=20000"
+      },
+      "oracle": "path",
+      "files": [],
+      "state": "UNVERIFIED",
+      "basis": "未声明退出码，实测 0 ⟹ 无判据可比（未声明视为未验证）",
+      "notes": []
+    }
+  ],
+  "failed": [
+    {
+      "id": "S1",
+      "what": null,
+      "declaration": {
+        "assert": null,
+        "cmd": "gate-definitely-not-a-real-exe-xyz",
+        "args": [],
+        "cwd": ".",
+        "exit": 0,
+        "envFailCodes": [],
+        "env": {}
+      },
+      "real": {
+        "exit": null,
+        "stdout": {
+          "text": "",
+          "truncated": false,
+          "bytes": 0
+        },
+        "stderr": {
+          "text": "",
+          "truncated": false,
+          "bytes": 0
+        },
+        "ms": 5,
+        "signal": null,
+        "cwd": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public",
+        "line": "gate-definitely-not-a-real-exe-xyz",
+        "capture": "fd",
+        "harness": "spawn_error",
+        "error": {
+          "code": "ENOENT",
+          "message": "spawnSync gate-definitely-not-a-real-exe-xyz ENOENT"
+        },
+        "outputNote": "截断保留【首+尾】（尾 = 终判串所在处）；outMax=20000"
+      },
+      "oracle": "exit_code",
+      "files": [],
+      "state": "UNVERIFIED",
+      "basis": "命令未能启动（ENOENT）⟹ 未跑，不得当通过",
+      "notes": [
+        "真实错误：ENOENT spawnSync gate-definitely-not-a-real-exe-xyz ENOENT"
+      ]
+    },
+    {
+      "id": "S3",
+      "what": null,
+      "declaration": {
+        "assert": null,
+        "cmd": "\"C:\\Users\\john\\nodejs\\node.exe\" -e \"process.exitCode=0\"",
+        "args": [],
+        "cwd": ".",
+        "exit": null,
+        "envFailCodes": [],
+        "env": {}
+      },
+      "real": {
+        "exit": 0,
+        "stdout": {
+          "text": "",
+          "truncated": false,
+          "bytes": 0
+        },
+        "stderr": {
+          "text": "",
+          "truncated": false,
+          "bytes": 0
+        },
+        "ms": 134,
+        "signal": null,
+        "cwd": "E:\\ChongyouGreenbike-dsh\\_build\\fsft-public",
+        "line": "\"C:\\Users\\john\\nodejs\\node.exe\" -e \"process.exitCode=0\"",
+        "capture": "fd",
+        "harness": "exited",
+        "error": null,
+        "outputNote": "截断保留【首+尾】（尾 = 终判串所在处）；outMax=20000"
+      },
+      "oracle": "path",
+      "files": [],
+      "state": "UNVERIFIED",
+      "basis": "未声明退出码，实测 0 ⟹ 无判据可比（未声明视为未验证）",
+      "notes": []
+    }
+  ]
+}
