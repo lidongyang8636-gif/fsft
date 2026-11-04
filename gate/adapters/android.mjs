@@ -1,7 +1,7 @@
-﻿/**
+/**
  * gate/adapters/android.mjs —— `android` 域适配器。
  *
- * ★ 本域在本沙箱**跑不了**（TASK.2 §1）：主仓库 `E:\ChongyouGreenbike` 对本工作区**只读**
+ * ★ 本域在本沙箱**跑不了**（TASK.2 §1）：主仓库 `<MAINREPO>` 对本工作区**只读**
  *   （实测 `Set-Content` → 访问被拒绝），而 `gradlew testDebugUnitTest` 必须写构建产物；
  *   模拟器/实机点击还需要设备与 `mobile-automator-*` 工具链。
  *
@@ -21,9 +21,9 @@ export const TASK_META = {
   _provenance: {
     note: '★ 本描述符由 gate/adapters/android.mjs#buildTask() 生成；用 `node gate/scripts/gen-tasks.mjs --check` 机械核对。',
     adapter: 'gate/adapters/android.mjs',
-    baseline: '实测（2026-10-16）：主仓库 `Set-Content` → 访问被拒绝；`gradlew.bat` 位于 E:\\ChongyouGreenbike\\前端项目文件\\Android客户端\\ChongyouGreenBike\\gradlew.bat（存在）。',
+    baseline: '实测（2026-10-16）：主仓库 `Set-Content` → 访问被拒绝；`gradlew.bat` 位于 <MAINREPO>\\前端项目文件\\Android客户端\\ChongyouGreenBike\\gradlew.bat（存在）。',
     zeroPassPolicy: '本域**只出现在 notRun[]**：acceptance 为空 ⇒ runner 产出 assertions=0、ran=0、verdict=UNVERIFIED、非零退出。**没有**任何 PASS 断言，也没有把"跑不了"换成 exit 0。',
-    noAbsolutePaths: '为保持冻结件可复现，真命令里的主仓库路径一律写成 `<MAINREPO>` 占位符（= `E:\\ChongyouGreenbike`，本机值记录在 REPRO 里），不把机器绝对路径钉进描述符。',
+    noAbsolutePaths: '为保持冻结件可复现，真命令里的主仓库路径一律写成 `<MAINREPO>` 占位符（= 主仓库根，本机值记录在 REPRO 里），不把机器绝对路径钉进描述符。',
   },
   noWrite: [],
   rollback: '本任务不执行任何命令（acceptance 为空）⟹ 无副作用；删 gate/evidence/gate-android-r2-*.json 即可。',

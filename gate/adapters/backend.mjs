@@ -1,4 +1,4 @@
-﻿/**
+/**
  * gate/adapters/backend.mjs —— `backend` 域适配器。
  *
  * ★ 本域在本沙箱**跑不了**（TASK.2 §1）：需要提权 + 服务进程 + H2/DB + 端口。
@@ -20,10 +20,10 @@ export const TASK_META = {
   _provenance: {
     note: '★ 本描述符由 gate/adapters/backend.mjs#buildTask() 生成；用 `node gate/scripts/gen-tasks.mjs --check` 机械核对。',
     adapter: 'gate/adapters/backend.mjs',
-    baseline: '实测（2026-10-16）：主仓库只读；`E:\\ChongyouGreenbike\\后端项目文件\\greenbike-server\\gradlew.bat` 存在；'
+    baseline: '实测（2026-10-16）：主仓库只读；`<MAINREPO>\\后端项目文件\\greenbike-server\\gradlew.bat` 存在；'
       + '第一代 `smart_home/slices/_common/` 与第二代 `lab_2_2_11_wifi-package/` 的域内脚本已在 INVENTORY §1/§2 逐条登记。',
     zeroPassPolicy: '本域**只出现在 notRun[]**：acceptance 为空 ⇒ assertions=0、ran=0、verdict=UNVERIFIED、非零退出。',
-    noAbsolutePaths: '主仓库路径写成 `<MAINREPO>` 占位符（= `E:\\ChongyouGreenbike`），避免把机器绝对路径钉进冻结件。',
+    noAbsolutePaths: '主仓库路径写成 `<MAINREPO>` 占位符（= 主仓库根），避免把机器绝对路径钉进冻结件。',
   },
   noWrite: [],
   rollback: '本任务不执行任何命令（acceptance 为空）⟹ 无副作用；删 gate/evidence/gate-backend-r2-*.json 即可。',
